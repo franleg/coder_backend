@@ -1,0 +1,96 @@
+import fs from 'fs';
+
+const path = 'files/products.json';
+
+class ProductManager {
+ 
+    getAll = async() =>{
+        try{
+            if(fs.existsSync(path)){
+                let fileData = await fs.promises.readFile(path,'utf-8');
+                let products = JSON.parse(fileData);
+                return products;
+                
+            }else{
+                return [];
+            }
+
+        }catch(error){
+            console.log("Error: " + error);
+        }
+    }
+
+    addProduct = async(newProd, oldProd) =>{
+        try{
+            let fileData = await this.getAll();
+
+            if(oldProd){
+                fileData[oldProd.id-1] = newProd;
+                newProd.id = oldProd.id;
+                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+                return `El producto ${oldProd.title} ha sido reemplazado por ${newProd.title}.`
+
+            }else if(fileData.length === 0){
+                newProd.id = 1;
+                fileData.push(newProd);
+                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+
+            }else{
+                newProd.id = fileData[fileData.length-1].id + 1;
+                fileData.push(newProd);
+                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+            } 
+
+            return `El producto ${newProd.title} ha sido añadido.`
+
+        }catch(error){
+            console.log("Error: " + error)
+        }
+    }
+
+    getById = async (idNumber) =>{
+        try{
+            const fileData = await this.getAll();
+            if(!fileData[idNumber]) return `No se ha podido encontrar el producto con id ${idNumber}.`
+            let product = fileData.find(prod => prod.id == idNumber);
+            return product;
+
+        }catch(error){
+            console.log("Error: " + error)
+        }
+    }
+
+    deleteById = async (idNumber) =>{
+        try{
+            const fileData = await this.getAll();
+            let product = fileData.find(prod => prod.id == idNumber);
+
+            if(product === undefined) {
+                return `No se ha podido encontrar el producto con id ${idNumber}.`;
+
+            }else{
+                let newFileData = fileData.filter(prods => prods.id !== parseInt(idNumber));
+                await fs.promises.writeFile(path, JSON.stringify(newFileData, null, '\t'));
+                return `El producto ${product.title} ha sido removido.`
+            }
+
+        }catch(error){
+                console.log("Error: " + error)
+            }
+        }
+
+    deleteAll = async () =>{
+        try{
+            let fileData = await this.getAll();
+            fileData = []
+            await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+
+        }catch(error){
+            console.log("Error: " + error)
+        }
+    }
+
+}
+
+// module.exports = ProductManager;
+export {ProductManager};

@@ -1,0 +1,22 @@
+html, body {
+    background-color: gray;
+}
+
+h1, a, h2, p, hr {
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    width: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    margin: auto;
+}
+
+

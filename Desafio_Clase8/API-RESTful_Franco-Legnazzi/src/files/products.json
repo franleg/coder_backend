@@ -1,0 +1,50 @@
+[
+	{
+		"title": "Pioneer xdj 1000 mk2",
+		"price": 500,
+		"category": "reproductores",
+		"id": 1
+	},
+	{
+		"title": "JBL 305 mk2",
+		"price": 140,
+		"category": "monitores",
+		"id": 2
+	},
+	{
+		"title": "Yamaha hs5",
+		"price": 180,
+		"category": "monitores",
+		"id": 3
+	},
+	{
+		"title": "Sennheiser hd-25",
+		"price": 70,
+		"category": "auriculares",
+		"id": 4
+	},
+	{
+		"title": "Pioneer djm 450 mk2",
+		"price": 120,
+		"category": "mixers",
+		"id": 5
+	},
+	{
+		"title": "Allen&Heath Xone 92",
+		"model": 800,
+		"category": "mixers",
+		"id": 6
+	},
+	{
+		"title": "perro",
+		"price": "123",
+		"thumbnail": "asd",
+		"id": 7
+	},
+	{
+		"title": "perro",
+		"price": "123",
+		"thumbnail": "asd",
+		"id": 8
+	}
+]
