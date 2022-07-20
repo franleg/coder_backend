@@ -1,13 +1,15 @@
 import fs from 'fs';
-
-const path = 'files/products.json';
+import { __dirname } from '../utils.js'
 
 class ProductManager {
+    constructor(){
+        this.path = __dirname + '/files/products.json';
+    }
  
     getAll = async() =>{
         try{
-            if(fs.existsSync(path)){
-                let fileData = await fs.promises.readFile(path,'utf-8');
+            if(fs.existsSync(this.path)){
+                let fileData = await fs.promises.readFile(this.path,'utf-8');
                 let products = JSON.parse(fileData);
                 return products;
                 
@@ -38,18 +40,18 @@ class ProductManager {
             if(oldProd){
                 fileData[oldProd.id-1] = newProd;
                 newProd.id = oldProd.id;
-                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+                await fs.promises.writeFile(this.path, JSON.stringify(fileData, null, '\t'));
                 return `El producto ${oldProd.title} ha sido reemplazado por ${newProd.title}.`
 
             }else if(fileData.length === 0){
                 newProd.id = 1;
                 fileData.push(newProd);
-                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+                await fs.promises.writeFile(this.path, JSON.stringify(fileData, null, '\t'));
 
             }else{
                 newProd.id = fileData[fileData.length-1].id + 1;
                 fileData.push(newProd);
-                await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+                await fs.promises.writeFile(this.path, JSON.stringify(fileData, null, '\t'));
             } 
 
             return `El producto ${newProd.title} ha sido añadido.`
@@ -65,7 +67,7 @@ class ProductManager {
             let product = fileData.find(prod => prod.id == idNumber)
             let productIndex = fileData.indexOf(product);
             fileData.splice(productIndex, 1);
-            await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+            await fs.promises.writeFile(this.path, JSON.stringify(fileData, null, '\t'));
             return `El producto ${product.title} ha sido eliminado.`
 
         }catch(error){
@@ -77,7 +79,7 @@ class ProductManager {
         try{
             let fileData = await this.getAll();
             fileData = []
-            await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+            await fs.promises.writeFile(this.path, JSON.stringify(fileData, null, '\t'));
 
         }catch(error){
             console.log("Error: " + error)

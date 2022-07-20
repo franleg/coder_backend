@@ -37,7 +37,7 @@ router.get('/:idProduct', async(req,res) => {
 // POST
 router.post('/', uploader.single('filePost'), async(req, res)=>{
     let newProduct = req.body;
-    newProduct.image = req.file.path;
+    newProduct.image = req.file.filename;
     if (!newProduct.title || !newProduct.price) return res.status(400).send({error: "Por favor, completar todos los campos."});
     let productAdded = await productService.addProduct(newProduct);
     res.status(200).send({"Message": productAdded});
@@ -47,7 +47,7 @@ router.post('/', uploader.single('filePost'), async(req, res)=>{
 router.put('/:idProduct', uploader.single('filePut'), async(req, res)=>{
     let id = req.params.idProduct;
     let newProduct = req.body;
-    newProduct.image = req.file.path;
+    newProduct.image = req.file.filename;
     let oldProduct = await productService.getById(id);
     if(!oldProduct) return res.status(400).send({error: `No se ha podido encontrar el producto con id ${id}`})
     let productReplaced = await productService.addProduct(newProduct, oldProduct);

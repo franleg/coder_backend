@@ -9,8 +9,6 @@ let inputPut = document.getElementById('input-put');
 formPost.addEventListener('submit', (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
-    let obj = {};
-    formData.forEach((value, key) => obj[key] = value);
     fetch('/api/products/', { 
         method: 'POST',
         body: formData
@@ -40,8 +38,6 @@ formPut.addEventListener('submit', (e) => {
     e.preventDefault();
     let id = inputPut.value;
     let formData = new FormData(e.target);
-    let obj = {};
-    formData.forEach((value, key) => obj[key] = value);
     fetch(`/api/products/${id}`, { 
         method: 'PUT',
         body: formData
