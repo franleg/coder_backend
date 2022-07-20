@@ -20,6 +20,17 @@ class ProductManager {
         }
     }
 
+    getById = async (idNumber) =>{
+        try{
+            const fileData = await this.getAll();
+            let product = fileData.find(prod => prod.id == idNumber);
+            return product;
+
+        }catch(error){
+            console.log("Error: " + error)
+        }
+    }
+
     addProduct = async(newProd, oldProd) =>{
         try{
             let fileData = await this.getAll();
@@ -48,36 +59,19 @@ class ProductManager {
         }
     }
 
-    getById = async (idNumber) =>{
-        try{
+    deleteById = async (idNumber) =>{
+        try {
             const fileData = await this.getAll();
-            if(!fileData[idNumber]) return `No se ha podido encontrar el producto con id ${idNumber}.`
-            let product = fileData.find(prod => prod.id == idNumber);
-            return product;
+            let product = fileData.find(prod => prod.id == idNumber)
+            let productIndex = fileData.indexOf(product);
+            fileData.splice(productIndex, 1);
+            await fs.promises.writeFile(path, JSON.stringify(fileData, null, '\t'));
+            return `El producto ${product.title} ha sido eliminado.`
 
         }catch(error){
             console.log("Error: " + error)
         }
     }
-
-    deleteById = async (idNumber) =>{
-        try{
-            const fileData = await this.getAll();
-            let product = fileData.find(prod => prod.id == idNumber);
-
-            if(product === undefined) {
-                return `No se ha podido encontrar el producto con id ${idNumber}.`;
-
-            }else{
-                let newFileData = fileData.filter(prods => prods.id !== parseInt(idNumber));
-                await fs.promises.writeFile(path, JSON.stringify(newFileData, null, '\t'));
-                return `El producto ${product.title} ha sido removido.`
-            }
-
-        }catch(error){
-                console.log("Error: " + error)
-            }
-        }
 
     deleteAll = async () =>{
         try{

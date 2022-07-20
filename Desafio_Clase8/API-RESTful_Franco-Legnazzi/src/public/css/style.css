@@ -15,8 +15,13 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 40%;
+    width: 50%;
     margin: auto;
+}
+
+form > input {
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 

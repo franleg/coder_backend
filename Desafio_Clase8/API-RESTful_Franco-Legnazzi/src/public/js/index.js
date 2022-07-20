@@ -1,20 +1,50 @@
-let form = document.getElementById('form');
+let formPost = document.getElementById('form-post');
+let formGet = document.getElementById('form-get');
+let inputGet = document.getElementById('input-get');
+let formDelete = document.getElementById('form-delete');
+let inputDelete = document.getElementById('input-delete');
+let formPut = document.getElementById('form-put')
+let inputPut = document.getElementById('input-put');
 
-const handleSubmit = (event, form, route) => {
-    event.preventDefault();
-    let formData = new FormData(form);
+formPost.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let formData = new FormData(e.target);
     let obj = {};
     formData.forEach((value, key) => obj[key] = value);
-    fetch(route, {
-            method: 'POST',
-            body: JSON.stringify(obj),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
-    )
-        .then(res => res.json())
-        .then(json =>console.log(json));
-}
+    fetch('/api/products/', { 
+        method: 'POST',
+        body: formData
+    }).then(res => res.json())
+      .then (json => console.log(json))
+});
 
-form.addEventListener('submit', (e) => handleSubmit(e, e.target,'/api/products'))
+formGet.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let id = inputGet.value;
+    fetch (`/api/products/${id}`, {
+        method: 'GET'
+    }).then(res => res.json())
+      .then (json => console.log(json))
+});
+
+formDelete.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let id = inputDelete.value;
+    fetch (`/api/products/${id}`, {
+        method: 'DELETE'
+    }).then(res => res.json())
+      .then (json => console.log(json))
+});
+
+formPut.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let id = inputPut.value;
+    let formData = new FormData(e.target);
+    let obj = {};
+    formData.forEach((value, key) => obj[key] = value);
+    fetch(`/api/products/${id}`, { 
+        method: 'PUT',
+        body: formData
+    }).then(res => res.json())
+      .then (json => console.log(json))
+});

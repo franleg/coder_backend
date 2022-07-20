@@ -1,14 +1,18 @@
 import { Router } from 'express';
 import { ProductManager } from "../managers/productManager.js";
+import { uploader } from '../utils.js';
 
 const router = Router();
 
 const productService = new ProductManager();
 
-const validationParams = (id) => {
-    if (isNaN(id)) return res.status(400).send({error: 'Por favor, ingresar un valor númerico.'});
+const validation = (productsFile, id, res) => {
+    let product = productsFile.find(prod => prod.id == id);
+    if(!product) return res.status(400).send({error: `No se ha podido encontrar el producto con id ${id}.`});
+    if(isNaN(id)) return res.status(400).send({error: 'Por favor, ingresar un valor numérico.'});
 }
 
+// GET ALL
 router.get('/', async(req, res)=>{
     let productsFile = await productService.getAll();
     let category = req.query.category;
@@ -22,34 +26,40 @@ router.get('/', async(req, res)=>{
     res.status(200).send(productsFile);
 })
 
+// GET BY ID
 router.get('/:idProduct', async(req,res) => {
     let id = req.params.idProduct;
-    validationParams(id);
-    productFound = await productService.getById(id);
-    res.status(200).send(productFound);
+    let productFound = await productService.getById(id);
+    if (!productFound) return res.status(400).send({error:`No se ha podido encontrar el producto con id ${id}`})
+    res.status(200).send({"Product found": productFound});
 })
 
-router.post('/', async(req, res)=>{
+// POST
+router.post('/', uploader.single('filePost'), async(req, res)=>{
     let newProduct = req.body;
-    if (newProduct === {}) return res.status(400).send('No se ha podido añadir el producto.');
+    newProduct.image = req.file.path;
+    if (!newProduct.title || !newProduct.price) return res.status(400).send({error: "Por favor, completar todos los campos."});
     let productAdded = await productService.addProduct(newProduct);
-    res.status(200).send(productAdded);
+    res.status(200).send({"Message": productAdded});
 })
 
-router.put('/:idProduct', async(req, res)=>{
+// PUT
+router.put('/:idProduct', uploader.single('filePut'), async(req, res)=>{
     let id = req.params.idProduct;
-    validationParams(id);
     let newProduct = req.body;
+    newProduct.image = req.file.path;
     let oldProduct = await productService.getById(id);
+    if(!oldProduct) return res.status(400).send({error: `No se ha podido encontrar el producto con id ${id}`})
     let productReplaced = await productService.addProduct(newProduct, oldProduct);
-    res.status(200).send(productReplaced);
+    res.status(200).send({"Message": productReplaced});
 })
 
+// DELETE BY ID
 router.delete('/:idProduct', async(req, res)=>{
     let id = req.params.idProduct;
-    validationParams(id);
     let productRemoved = await productService.deleteById(id);
-    res.status(200).send(productRemoved);
+    if(!productRemoved) return res.status(400).send({error: `No se ha podido eliminar el producto con id ${id}`})
+    res.status(200).send({"Message": productRemoved});
 })
 
 export default router;

@@ -11,16 +11,49 @@
     <h1>Tienda de productos</h1>
     <hr>
     <a href="http://localhost:8081/api/products">Ver todos los productos</a>
+    <ul id="productsList">
+
+    </ul>
     <div>
-        <h2>Agregar producto:</h2>
-        <form id="form">
+        <h2>Agregar producto</h2>
+        <form id="form-post">
             <label>Title</label>
-            <input type="text" class="form-input" placeholder="Title:" name="title">
+            <input type="text" placeholder="Escribir el nombre del producto" name="title">
             <label>Price</label>
-            <input type="number" class="form-input" placeholder="Price:" name="price">
+            <input type="number" placeholder="Escribir el precio del producto" name="price">
             <label>Thumbnail</label>
-            <input type="text" class="form-input" placeholder="Thumbnail:" name="thumbnail">
-            <input type="submit" value="ENVIAR" class="form-button">
+            <input type="file" name="filePost">
+            <input type="submit" value="Agregar">
+        </form>
+    </div>
+
+    <div>
+        <h2>Buscar producto por id</h2>
+        <form id="form-get">
+            <input id="input-get" type="number" placeholder="Ingresar el id del producto">
+            <input type="submit" value="Buscar">
+        </form>
+    </div>
+
+    <div>
+        <h2>Borrar producto por id</h2>
+        <form id="form-delete">
+            <input id="input-delete" type="number" placeholder="Ingresar el id del producto">
+            <input type="submit" value="Borrar">
+        </form>
+    </div>
+
+    <div>
+        <h2>Actualizar producto por id</h2>
+        <form id="form-put">
+            <input id="input-put" type="number" placeholder="Ingresar el id del producto a actualizar">
+            <label>Title</label>
+            <input type="text" placeholder="Escribir el nombre del nuevo producto" name="title">
+            <label>Price</label>
+            <input type="number" placeholder="Escribir el precio del nuevo producto" name="price">
+            <label>Thumbnail</label>
+            <input type="file" name="filePut">
+            <input type="submit" value="Actualizar">
         </form>
     </div>
     <script src="js/index.js"></script>
