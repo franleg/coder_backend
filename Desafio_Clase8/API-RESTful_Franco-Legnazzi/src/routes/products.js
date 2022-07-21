@@ -6,12 +6,6 @@ const router = Router();
 
 const productService = new ProductManager();
 
-const validation = (productsFile, id, res) => {
-    let product = productsFile.find(prod => prod.id == id);
-    if(!product) return res.status(400).send({error: `No se ha podido encontrar el producto con id ${id}.`});
-    if(isNaN(id)) return res.status(400).send({error: 'Por favor, ingresar un valor numérico.'});
-}
-
 // GET ALL
 router.get('/', async(req, res)=>{
     let productsFile = await productService.getAll();
