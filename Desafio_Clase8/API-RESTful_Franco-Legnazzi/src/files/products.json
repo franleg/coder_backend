@@ -1,20 +1,32 @@
 [
 	{
 		"title": "Pioneer xdj 1000 mk2",
-		"price": "500",
-		"image": "1658288667484-pioneer-dj-xdj-1000mk2-high-performance-multi-player-dj-deck.jpg",
+		"price": "500.000",
+		"image": "compacteras.1000.jpg",
 		"id": 1
 	},
 	{
 		"title": "Sennheiser hd-25",
-		"price": "200",
-		"image": "1658288702620-d868966c-product_detail_x2_desktop_hd_25_isofront_rgb_red.jpg",
+		"price": "200.000",
+		"image": "auris.sennheiser.jpg",
 		"id": 2
 	},
 	{
 		"title": "JBL 305 mk2",
-		"price": "100",
-		"image": "1658288752073-Kit-Home-Studio_-Par-De-Monitores-de-Estudio-JBL-305P-MkII--1-.png",
+		"price": "100.000",
+		"image": "monitores.jbl.jpg",
 		"id": 3
+	},
+	{
+		"title": "Pioneer xdj 1000 mk2",
+		"price": "500.000",
+		"image": "compacteras.1000.jpg",
+		"id": 4
+	},
+	{
+		"title": "Sennheiser hd-25",
+		"price": "200.000",
+		"image": "auris.sennheiser.jpg",
+		"id": 5
 	}
 ]

@@ -1,0 +1,51 @@
+<div class="index-container">
+    <h1>TIENDA DE PRODUCTOS</h1>
+    <h4>(Handlebars)</h4>
+    <hr>
+    <a href="http://localhost:8080/products" class="btn btn-primary btn-products">Mostrar productos</a>
+
+    <div>
+        <h2>Agregar producto</h2>
+        <form id="form-post">
+            <label>Title</label>
+            <input type="text" placeholder="Escribir el nombre del producto" name="title">
+            <label>Price</label>
+            <input type="number" placeholder="Escribir el precio del producto" name="price">
+            <label>Thumbnail</label>
+            <input type="file" name="filePost">
+            <input type="submit" value="Agregar" class="btn btn-primary">
+        </form>
+    </div>
+
+    <div>
+        <h2>Buscar producto por id</h2>
+        <form id="form-get">
+            <input id="input-get" type="number" placeholder="Ingresar el id del producto">
+            <input type="submit" value="Buscar" class="btn btn-primary">
+        </form>
+    </div>
+
+    <div>
+        <h2>Borrar producto por id</h2>
+        <form id="form-delete">
+            <input id="input-delete" type="number" placeholder="Ingresar el id del producto">
+            <input type="submit" value="Borrar" class="btn btn-primary">
+        </form>
+    </div>
+
+    <div>
+        <h2 class="form-title">Actualizar producto por id</h2>
+        <form id="form-put">
+            <input id="input-put" type="number" placeholder="Ingresar el id del producto a actualizar">
+            <label>Title</label>
+            <input type="text" placeholder="Escribir el nombre del nuevo producto" name="title">
+            <label>Price</label>
+            <input type="number" placeholder="Escribir el precio del nuevo producto" name="price">
+            <label>Thumbnail</label>
+            <input type="file" name="filePut">
+            <input type="submit" value="Actualizar" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+<script src="js/home.js"></script>
