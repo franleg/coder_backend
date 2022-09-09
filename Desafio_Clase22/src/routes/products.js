@@ -24,7 +24,7 @@ router.get('/test', async(req, res)=>{
 });
 
 // GET ALL PRODUCTS
-router.get('/', async(req, res)=>{
+/* router.get('/', async(req, res)=>{
     try{
         let products = await productsService.find();
         res.status(200).send(products);
@@ -32,7 +32,7 @@ router.get('/', async(req, res)=>{
     }catch(error){
         res.status(500).send('Cannot get products');
     }
-});
+}); */
 
 // GET PRODUCT BY ID
 /* router.get('/:idProduct', async(req,res) => {

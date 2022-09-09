@@ -12,18 +12,17 @@ router.get('/', async(req, res)=>{
 
         // Object data
         let chat = {
-            id: 'messages',
+            id: 1000,
             messages: messagesAux
         }
-        console.log(JSON.stringify(chat, null, '\t'));
 
         //Entities
-        const author = new schema.Entity('authors'); // NO ENTIENDO POR QUE NO ME HACE LA ENTIDAD DE AUTHORS
-        const message = new schema.Entity('messages',{
-            author: [author]
+        const authorSchema = new schema.Entity('authors');
+        const messageSchema = new schema.Entity('messages',{
+            author: authorSchema
         })
         const chatSchema = new schema.Entity('chats',{
-            messages: [message]
+            messages: [messageSchema]
         });
 
         // Normalized data
