@@ -32,7 +32,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="td-id">Id</th>
                             <th>Nombre</th>
                             <th>Precio</th>
                             <th>Foto</th>
@@ -41,7 +40,6 @@
                     <tbody id="list-products">
                         {{#each products}}
                             <tr>
-                                <td class="td-id">{{this.id}}</td>
                                 <td>{{this.title}}</td>
                                 <td>${{this.price}}</td>
                                 <td><img src="http://localhost:8080/img/{{this.image}}" class="img-fluid img-product" alt="imagen"></td>

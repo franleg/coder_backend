@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
     let messages = await messagesService.find();
     res.render('home', {
         hasProducts: products.length > 0,
-        products,
+        products: products.map(messages => messages.toJSON()),
         messages: messages.map(messages => messages.toJSON())
     });
 });

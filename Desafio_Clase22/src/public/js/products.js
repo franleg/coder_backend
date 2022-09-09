@@ -26,8 +26,7 @@ formDelete.addEventListener('submit', (e) => {
 
 socketProducts.on('server: new product', data => {
     let newProduct = document.createElement('tr');
-    newProduct.innerHTML = `<td class="td-id">${data.id}</td>
-                            <td>${data.title}</td>
+    newProduct.innerHTML = `<td>${data.title}</td>
                             <td>$${data.price}</td>
                             <td><img src="http://localhost:8080/img/${data.image}" class="img-fluid img-product" alt="imagen"></td>`
     listProducts.appendChild(newProduct)                        
@@ -38,7 +37,6 @@ socketProducts.on('server: products', data => {
     let products = "";
     data.forEach(product => {
         products += `<tr>
-                        <td class="td-id">${product.id}</td>
                         <td>${product.title}</td>
                         <td>$${product.price}</td>
                         <td><img src="http://localhost:8080/img/${product.image}" class="img-fluid img-product" alt="imagen"></td>
