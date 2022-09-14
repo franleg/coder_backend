@@ -11,12 +11,12 @@ formChat.addEventListener('submit', (e) => {
     e.preventDefault();
     userName = userChat.value;
     if(chatMessage.value.trim().length>0){
-        socketChat.emit('message', {user: userName, message: chatMessage.value, time: moment().format(('DD/MM/YYYY hh:mm:ss'))})
+        socketChat.emit('client: message', {user: userName, message: chatMessage.value, time: moment().format(('DD/MM/YYYY hh:mm:ss'))})
         chatMessage.value= "";
     }
 })
 
-socketChat.on('messages', data => {
+socketChat.on('server: messages', data => {
     let messages = "";
     data.forEach(message => {
         messages += `<div class="message">

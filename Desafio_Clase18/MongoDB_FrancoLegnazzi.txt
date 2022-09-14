@@ -1,0 +1,607 @@
+test> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    72.00 KiB
+test    112.00 KiB
+users    72.00 KiB
+test> use ecommerce
+switched to db ecommerce
+
+ecommerce> db
+ecommerce
+
+ecommerce> db.createCollection('products')
+{ ok: 1 }
+
+ecommerce> db.createCollection('messages')
+{ ok: 1 }
+
+ecommerce> show collections
+messages
+products
+
+
+
+1) y 2)
+ecommerce> db.messages.insertMany(
+... [
+...     {
+.....           "user": "julianbenitez@hotmail.com",
+.....           "message": "Hola a todos!",
+.....           "time": "02/08/2022 12:13:38"
+.....   },
+...     {
+.....           "user": "camilacanteros@hotmail.com",
+.....           "message": "Hola!",
+.....           "time": "02/08/2022 12:24:26"
+.....   },
+...     {
+.....           "user": "facundogomez@hotmail.com",
+.....           "message": "Hola como va?",
+.....           "time": "02/08/2022 12:53:17"
+.....   },
+...     {
+.....           "user": "agustinalopez@hotmail.com",
+.....           "message": "Buenas!",
+.....           "time": "02/08/2022 12:53:27"
+.....   },
+...     {
+.....           "user": "lautarogonzales@hotmail.com",
+.....           "message": "Hola!",
+.....           "time": "02/08/2022 01:03:23"
+.....   },
+...     {
+.....           "user": "luciasabatini@hotmail.com",
+.....           "message": "Buenos dias, como estan?",
+.....           "time": "02/08/2022 12:13:38"
+.....   },
+...     {
+.....           "user": "martinvescovo@hotmail.com",
+.....           "message": "Hola!",
+.....           "time": "02/08/2022 12:24:26"
+.....   },
+...     {
+.....           "user": "danielagimenez@hotmail.com",
+.....           "message": "Buena semana a todos",
+.....           "time": "02/08/2022 12:53:17"
+.....   },
+...     {
+.....           "user": "federicocroce@hotmail.com",
+.....           "message": "Buenas!",
+.....           "time": "02/08/2022 12:53:27"
+.....   },
+...     {
+.....           "user": "karenlopez@hotmail.com",
+.....           "message": "Hola, que tal?",
+.....           "time": "02/08/2022 01:03:23"
+.....   }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("63028da0ee6e5f3f22ad3505"),
+    '1': ObjectId("63028da0ee6e5f3f22ad3506"),
+    '2': ObjectId("63028da0ee6e5f3f22ad3507"),
+    '3': ObjectId("63028da0ee6e5f3f22ad3508"),
+    '4': ObjectId("63028da0ee6e5f3f22ad3509"),
+    '5': ObjectId("63028da0ee6e5f3f22ad350a"),
+    '6': ObjectId("63028da0ee6e5f3f22ad350b"),
+    '7': ObjectId("63028da0ee6e5f3f22ad350c"),
+    '8': ObjectId("63028da0ee6e5f3f22ad350d"),
+    '9': ObjectId("63028da0ee6e5f3f22ad350e")
+  }
+}
+
+ecommerce> db.products.insertMany(
+... [
+...     {
+.....           "title": "medias",
+.....           "price": 120,
+.....           "image": "https://saborstore.com/wp-content/uploads/2021/06/Medias-Sport-Verde-600x600.jpg",
+.....   },
+...     {
+.....           "title": "top",
+.....           "price": 580,
+.....           "image": "https://static.pullandbear.net/2/photos/2022/I/0/1/p/8246/321/800/8246321800_1_1_3.jpg?t=1656605543343",
+.....   },
+...     {
+.....           "title": "pollera",
+.....           "price": 900,
+.....           "image": "http://d3ugyf2ht6aenh.cloudfront.net/stores/903/627/products/9f9dae3bb9903ba52019b6f64f2d45721-6100a46304e0d0661315966458817842-640-0.jpg",
+.....   },
+...     {
+.....           "title": "musculosa",
+.....           "price": 1280,
+.....           "image": "https://bostonhype.com.ar/wp-content/uploads/2021/09/Musculosa-Negra-1-1-scaled.jpg",
+.....   },
+...     {
+.....           "title": "remera",
+.....           "price": 1700,
+.....           "image": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/704/127/products/88ffd06f-ed3f-440f-9b4c-bcc17f1c3c3f-b461176613b00844e616350976551917-1024-1024.jpeg",
+.....   },
+...     {
+.....           "title": "short",
+.....           "price": 2300,
+.....           "image": "https://hmperu.vtexassets.com/arquivos/ids/2146033/Short-de-buzo---Negro---H-M-PE.jpg?v=637795941119100000",
+.....   },
+...     {
+.....           "title": "pantalon",
+.....           "price": 2860,
+.....           "image": "https://media.vogue.es/photos/5cc7367ffdc82261481fda65/master/w_2500,h_3194,c_limit/pantalones_vaqueros_mom_jeans_goma_pull_bear_basico_armario_2019_7512.jpg",
+.....   },
+...     {
+.....           "title": "chaleco",
+.....           "price": 3350,
+.....           "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1634287492-chaleco-verde-mango-1634287454.jpg?crop=1xw:1xh;center,top&resize=480:*",
+.....   },
+...     {
+.....           "title": "buzo",
+.....           "price": 4320,
+.....           "image": "https://f.fcdn.app/imgs/a7ab0b/tienda.ucc.edu.ar/ucatar/6eaa/original/catalogo/03000020011/1920-1200/buzo-con-capucha-ucc-negro.jpg",
+.....   },
+...     {
+.....           "title": "campera",
+.....           "price": 4990,
+.....           "image": "https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw9cb7a555/BH5388_031_24.jpg?imwidth=915&impolicy=product",
+.....   }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("630268acee6e5f3f22ad34fb"),
+    '1': ObjectId("630268acee6e5f3f22ad34fc"),
+    '2': ObjectId("630268acee6e5f3f22ad34fd"),
+    '3': ObjectId("630268acee6e5f3f22ad34fe"),
+    '4': ObjectId("630268acee6e5f3f22ad34ff"),
+    '5': ObjectId("630268acee6e5f3f22ad3500"),
+    '6': ObjectId("630268acee6e5f3f22ad3501"),
+    '7': ObjectId("630268acee6e5f3f22ad3502"),
+    '8': ObjectId("630268acee6e5f3f22ad3503"),
+    '9': ObjectId("630268acee6e5f3f22ad3504")
+  }
+}
+
+
+
+3)
+ecommerce> db.messages.find()
+[
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad3505"),
+    user: 'julianbenitez@hotmail.com',
+    message: 'Hola a todos!',
+    time: '02/08/2022 12:13:38'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad3506"),
+    user: 'camilacanteros@hotmail.com',
+    message: 'Hola!',
+    time: '02/08/2022 12:24:26'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad3507"),
+    user: 'facundogomez@hotmail.com',
+    message: 'Hola como va?',
+    time: '02/08/2022 12:53:17'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad3508"),
+    user: 'agustinalopez@hotmail.com',
+    message: 'Buenas!',
+    time: '02/08/2022 12:53:27'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad3509"),
+    user: 'lautarogonzales@hotmail.com',
+    message: 'Hola!',
+    time: '02/08/2022 01:03:23'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad350a"),
+    user: 'luciasabatini@hotmail.com',
+    message: 'Buenos dias, como estan?',
+    time: '02/08/2022 12:13:38'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad350b"),
+    user: 'martinvescovo@hotmail.com',
+    message: 'Hola!',
+    time: '02/08/2022 12:24:26'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad350c"),
+    user: 'danielagimenez@hotmail.com',
+    message: 'Buena semana a todos',
+    time: '02/08/2022 12:53:17'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad350d"),
+    user: 'federicocroce@hotmail.com',
+    message: 'Buenas!',
+    time: '02/08/2022 12:53:27'
+  },
+  {
+    _id: ObjectId("63028da0ee6e5f3f22ad350e"),
+    user: 'karenlopez@hotmail.com',
+    message: 'Hola, que tal?',
+    time: '02/08/2022 01:03:23'
+  }
+]
+
+ecommerce> db.products.find()
+[
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fb"),
+    title: 'medias',
+    price: 120,
+    image: 'https://saborstore.com/wp-content/uploads/2021/06/Medias-Sport-Verde-600x600.jpg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fc"),
+    title: 'top',
+    price: 580,
+    image: 'https://static.pullandbear.net/2/photos/2022/I/0/1/p/8246/321/800/8246321800_1_1_3.jpg?t=1656605543343'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fd"),
+    title: 'pollera',
+    price: 900,
+    image: 'http://d3ugyf2ht6aenh.cloudfront.net/stores/903/627/products/9f9dae3bb9903ba52019b6f64f2d45721-6100a46304e0d0661315966458817842-640-0.jpg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fe"),
+    title: 'musculosa',
+    price: 1280,
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2021/09/Musculosa-Negra-1-1-scaled.jpg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34ff"),
+    title: 'remera',
+    price: 1700,
+    image: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/704/127/products/88ffd06f-ed3f-440f-9b4c-bcc17f1c3c3f-b461176613b00844e616350976551917-1024-1024.jpeg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3500"),
+    title: 'short',
+    price: 2300,
+    image: 'https://hmperu.vtexassets.com/arquivos/ids/2146033/Short-de-buzo---Negro---H-M-PE.jpg?v=637795941119100000'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3501"),
+    title: 'pantalon',
+    price: 2860,
+    image: 'https://media.vogue.es/photos/5cc7367ffdc82261481fda65/master/w_2500,h_3194,c_limit/pantalones_vaqueros_mom_jeans_goma_pull_bear_basico_armario_2019_7512.jpg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3502"),
+    title: 'chaleco',
+    price: 3350,
+    image: 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1634287492-chaleco-verde-mango-1634287454.jpg?crop=1xw:1xh;center,top&resize=480:*'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3503"),
+    title: 'buzo',
+    price: 4320,
+    image: 'https://f.fcdn.app/imgs/a7ab0b/tienda.ucc.edu.ar/ucatar/6eaa/original/catalogo/03000020011/1920-1200/buzo-con-capucha-ucc-negro.jpg'
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3504"),
+    title: 'campera',
+    price: 4990,
+    image: 'https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw9cb7a555/BH5388_031_24.jpg?imwidth=915&impolicy=product'
+  }
+]
+
+
+
+4)
+ecommerce> db.products.estimatedDocumentCount()
+10
+
+ecommerce> db.messages.estimatedDocumentCount()
+10
+
+
+
+5)
+a)
+ecommerce> db.products.insertOne(
+... {
+..... "title": "polera",
+..... "price": "1470",
+..... "image": "https://bostonhype.com.ar/wp-content/uploads/2022/02/POLERA-NEGRA-1-scaled.jpg"
+..... }
+... )
+{
+  acknowledged: true,
+  insertedId: ObjectId("63028f0aee6e5f3f22ad350f")
+}
+
+ecommerce> db.products.find({'title':'polera'})
+[
+  {
+    _id: ObjectId("63028f0aee6e5f3f22ad350f"),
+    title: 'polera',
+    price: '1470',
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2022/02/POLERA-NEGRA-1-scaled.jpg'
+  }
+]
+
+
+b)
+I-
+ecommerce> db.products.find({"price":{$lt:1000}},{_id:0,title:1})
+[ 
+  { title: 'medias' }, 
+  { title: 'top' }, 
+  { title: 'pollera' } 
+]
+
+II-
+ecommerce> db.products.find({'price':{$gt:1000,$lt:3000}},{_id:0,title:1})
+[
+  { title: 'musculosa' },
+  { title: 'remera' },
+  { title: 'short' },
+  { title: 'pantalon' }
+]
+
+III-
+ecommerce> db.products.find({'price':{$gt:3000}},{_id:0,title:1})
+[ { title: 'chaleco' }, 
+  { title: 'buzo' }, 
+  { title: 'campera' } 
+]
+
+IV-
+ecommerce> db.products.find({},{_id:0,title:1}).sort({price:1}).skip(2).limit(1)
+[ { title: 'pollera' } ]
+
+
+c)
+ecommerce> db.products.updateMany({},{$set:{stock:100}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0
+}
+
+ecommerce> db.products.find()
+[
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fb"),
+    title: 'medias',
+    price: 120,
+    image: 'https://saborstore.com/wp-content/uploads/2021/06/Medias-Sport-Verde-600x600.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fc"),
+    title: 'top',
+    price: 580,
+    image: 'https://static.pullandbear.net/2/photos/2022/I/0/1/p/8246/321/800/8246321800_1_1_3.jpg?t=1656605543343',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fd"),
+    title: 'pollera',
+    price: 900,
+    image: 'http://d3ugyf2ht6aenh.cloudfront.net/stores/903/627/products/9f9dae3bb9903ba52019b6f64f2d45721-6100a46304e0d0661315966458817842-640-0.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fe"),
+    title: 'musculosa',
+    price: 1280,
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2021/09/Musculosa-Negra-1-1-scaled.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34ff"),
+    title: 'remera',
+    price: 1700,
+    image: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/704/127/products/88ffd06f-ed3f-440f-9b4c-bcc17f1c3c3f-b461176613b00844e616350976551917-1024-1024.jpeg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3500"),
+    title: 'short',
+    price: 2300,
+    image: 'https://hmperu.vtexassets.com/arquivos/ids/2146033/Short-de-buzo---Negro---H-M-PE.jpg?v=637795941119100000',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3501"),
+    title: 'pantalon',
+    price: 2860,
+    image: 'https://media.vogue.es/photos/5cc7367ffdc82261481fda65/master/w_2500,h_3194,c_limit/pantalones_vaqueros_mom_jeans_goma_pull_bear_basico_armario_2019_7512.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3502"),
+    title: 'chaleco',
+    price: 3350,
+    image: 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1634287492-chaleco-verde-mango-1634287454.jpg?crop=1xw:1xh;center,top&resize=480:*',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3503"),
+    title: 'buzo',
+    price: 4320,
+    image: 'https://f.fcdn.app/imgs/a7ab0b/tienda.ucc.edu.ar/ucatar/6eaa/original/catalogo/03000020011/1920-1200/buzo-con-capucha-ucc-negro.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3504"),
+    title: 'campera',
+    price: 4990,
+    image: 'https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw9cb7a555/BH5388_031_24.jpg?imwidth=915&impolicy=product',
+    stock: 100
+  },
+  {
+    _id: ObjectId("63028f0aee6e5f3f22ad350f"),
+    title: 'polera',
+    price: '1470',
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2022/02/POLERA-NEGRA-1-scaled.jpg',
+    stock: 100
+  }
+]
+
+
+d)
+ecommerce> db.products.updateMany({price:{$gt:4000}},{$set:{stock:0}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+
+ecommerce> db.products.find()
+[
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fb"),
+    title: 'medias',
+    price: 120,
+    image: 'https://saborstore.com/wp-content/uploads/2021/06/Medias-Sport-Verde-600x600.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fc"),
+    title: 'top',
+    price: 580,
+    image: 'https://static.pullandbear.net/2/photos/2022/I/0/1/p/8246/321/800/8246321800_1_1_3.jpg?t=1656605543343',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fd"),
+    title: 'pollera',
+    price: 900,
+    image: 'http://d3ugyf2ht6aenh.cloudfront.net/stores/903/627/products/9f9dae3bb9903ba52019b6f64f2d45721-6100a46304e0d0661315966458817842-640-0.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fe"),
+    title: 'musculosa',
+    price: 1280,
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2021/09/Musculosa-Negra-1-1-scaled.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34ff"),
+    title: 'remera',
+    price: 1700,
+    image: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/704/127/products/88ffd06f-ed3f-440f-9b4c-bcc17f1c3c3f-b461176613b00844e616350976551917-1024-1024.jpeg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3500"),
+    title: 'short',
+    price: 2300,
+    image: 'https://hmperu.vtexassets.com/arquivos/ids/2146033/Short-de-buzo---Negro---H-M-PE.jpg?v=637795941119100000',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3501"),
+    title: 'pantalon',
+    price: 2860,
+    image: 'https://media.vogue.es/photos/5cc7367ffdc82261481fda65/master/w_2500,h_3194,c_limit/pantalones_vaqueros_mom_jeans_goma_pull_bear_basico_armario_2019_7512.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3502"),
+    title: 'chaleco',
+    price: 3350,
+    image: 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1634287492-chaleco-verde-mango-1634287454.jpg?crop=1xw:1xh;center,top&resize=480:*',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3503"),
+    title: 'buzo',
+    price: 4320,
+    image: 'https://f.fcdn.app/imgs/a7ab0b/tienda.ucc.edu.ar/ucatar/6eaa/original/catalogo/03000020011/1920-1200/buzo-con-capucha-ucc-negro.jpg',
+    stock: 0
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3504"),
+    title: 'campera',
+    price: 4990,
+    image: 'https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw9cb7a555/BH5388_031_24.jpg?imwidth=915&impolicy=product',
+    stock: 0
+  },
+  {
+    _id: ObjectId("63028f0aee6e5f3f22ad350f"),
+    title: 'polera',
+    price: '1470',
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2022/02/POLERA-NEGRA-1-scaled.jpg',
+    stock: 100
+  }
+]
+
+
+e)
+ecommerce> db.products.deleteMany({price:{$lt:1000}})
+{ acknowledged: true, deletedCount: 3 }
+
+ecommerce> db.products.find()
+[
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34fe"),
+    title: 'musculosa',
+    price: 1280,
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2021/09/Musculosa-Negra-1-1-scaled.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad34ff"),
+    title: 'remera',
+    price: 1700,
+    image: 'https://d3ugyf2ht6aenh.cloudfront.net/stores/001/704/127/products/88ffd06f-ed3f-440f-9b4c-bcc17f1c3c3f-b461176613b00844e616350976551917-1024-1024.jpeg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3500"),
+    title: 'short',
+    price: 2300,
+    image: 'https://hmperu.vtexassets.com/arquivos/ids/2146033/Short-de-buzo---Negro---H-M-PE.jpg?v=637795941119100000',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3501"),
+    title: 'pantalon',
+    price: 2860,
+    image: 'https://media.vogue.es/photos/5cc7367ffdc82261481fda65/master/w_2500,h_3194,c_limit/pantalones_vaqueros_mom_jeans_goma_pull_bear_basico_armario_2019_7512.jpg',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3502"),
+    title: 'chaleco',
+    price: 3350,
+    image: 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1634287492-chaleco-verde-mango-1634287454.jpg?crop=1xw:1xh;center,top&resize=480:*',
+    stock: 100
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3503"),
+    title: 'buzo',
+    price: 4320,
+    image: 'https://f.fcdn.app/imgs/a7ab0b/tienda.ucc.edu.ar/ucatar/6eaa/original/catalogo/03000020011/1920-1200/buzo-con-capucha-ucc-negro.jpg',
+    stock: 0
+  },
+  {
+    _id: ObjectId("630268acee6e5f3f22ad3504"),
+    title: 'campera',
+    price: 4990,
+    image: 'https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw9cb7a555/BH5388_031_24.jpg?imwidth=915&impolicy=product',
+    stock: 0
+  },
+  {
+    _id: ObjectId("63028f0aee6e5f3f22ad350f"),
+    title: 'polera',
+    price: '1470',
+    image: 'https://bostonhype.com.ar/wp-content/uploads/2022/02/POLERA-NEGRA-1-scaled.jpg',
+    stock: 100
+  }
+]

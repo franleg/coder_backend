@@ -1,7 +1,7 @@
 {{!-- FORMULARIO --}}
 <div class="home-container">
     <div class="logOut-container">
-        <a {{!-- href="http://localhost:8080/logout" --}} id="btn-logOut" class="btn btn-primary btn-logOut">Log Out</a>
+        <a id="btn-logOut" class="btn btn-primary btn-logOut">Log Out</a>
     </div>
     <h1>Bienvenido {{this.name}}</h1>
     <hr>
@@ -63,7 +63,7 @@
 <div class="chat-container">
     <h2>Centro de mensajes</h2>
     <hr>
-    <form id="form-chat">
+    <form id="form-chat" class="form-container">
         <div id="chat-box" class="chat-box">
             {{#each messages}}
                 <div class="message">

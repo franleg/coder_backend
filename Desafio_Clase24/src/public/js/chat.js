@@ -1,10 +1,10 @@
 const socketChat = io();
 
-let formChat = document.getElementById('form-chat');
+/* let formChat = document.getElementById('form-chat');
 let chatBox = document.getElementById('chat-box');
 let chatMessage = document.getElementById('chat-message');
 
-/* let author;
+let author;
 
 Swal.fire({
     title: 'Registrate',

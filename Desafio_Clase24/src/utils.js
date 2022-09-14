@@ -17,8 +17,30 @@ const storage = multer.diskStorage({
 
 const uploader = multer({storage : storage});
 
+const objectTransform = (data) => {
+    let aux = [];
+    let chat = {};
+    for (const item of data) {
+        chat = {
+            id: item._id.toString(),
+            author:{
+                id: item.author.id,
+                name: item.author.name,
+                lastName: item.author.lastName,
+                age: item.author.age,
+                alias: item.author.alias,
+                avatar: item.author.avatar
+            },
+            text: item.text
+        };
+        aux.push(chat);
+        chat={}
+    }
+    return aux;
+}
+
 const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
 const isValidPassword = (user, password) => bcrypt.compareSync(password, user.password)
 
-export { __dirname, createHash, isValidPassword, uploader };
+export { __dirname, uploader, objectTransform, createHash, isValidPassword };

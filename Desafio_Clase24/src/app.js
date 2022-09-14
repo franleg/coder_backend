@@ -5,9 +5,11 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import { Server } from 'socket.io';
 import { __dirname } from './utils.js';
-import messagesService from './models/Messages.js';
 import viewsRouter from './routes/views.router.js';
 import sessionsRouter from './routes/sessions.router.js';
+import productsRouter from './routes/products.js';
+import messagesRouter from './routes/messages.js';
+import messagesService from './models/Messages.js';
 
 const app = express();
 const server = app.listen(8080, () => console.log('Listening on port 8080'));
@@ -26,7 +28,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(session({
     store: MongoStore.create({
         mongoUrl: 'mongodb+srv://francolegnazzi:coderbackend@codercluster.skwuuph.mongodb.net/coderBase?retryWrites=true&w=majority',
-        ttl: 10
+        ttl: 60
     }),
     secret: 'ABCDFG1234567890',
     resave: false,
@@ -34,6 +36,8 @@ app.use(session({
 }))
 app.use('/', viewsRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/messages', messagesRouter);
 app.use('*', (req, res) => {
     res.render('error404');
 })
@@ -57,4 +61,4 @@ io.on('connection', socket =>{
         let messages = await messagesService.find();
         io.emit('server: messages', messages);
     })
-});
+})

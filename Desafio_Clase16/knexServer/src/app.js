@@ -38,10 +38,10 @@ io.on('connection', socket =>{
         io.emit('server: products', products);
     })
 
-    socket.on('message', async(data) => {
+    socket.on('client: message', async(data) => {
         let newMessage = data;
         await db('messages').insert(newMessage);
         let messages = await db('messages').select('*');
-        io.emit('messages', messages);
+        io.emit('server: messages', messages);
     })
 });
