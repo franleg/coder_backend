@@ -1,0 +1,32 @@
+html, body {
+    background-color: rgb(44, 44, 44);
+}
+
+h1 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 30px;
+}
+
+.info-container > ul {
+    padding-top: 20px ;
+    background-color: whitesmoke;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10 10px rgba(0, 0, 0, 0.5)
+}
+
+.info-container > ul > li {
+    padding-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
