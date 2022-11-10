@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\src\\app.js",
+            "env": {
+                "MONGO_USER": "francolegnazzi",
+                "MONGO_PASSWORD": "coderbackend",
+                "MONGO_DATABASE": "CoderDB",
+                "SESSION_SECRET": "s3cRetsEsSi0nC0dErBacK3nD2o22",
+                "DOMAIN": "http://localhost:8080",
+                "ADMIN_EMAIL": "correoadmin@correo.com",
+                "ADMIN_PASSWORD": "coderbackend2022",
+                "ADMIN_NAME": "Admin"
+            }
+        }
+    ]
+}
