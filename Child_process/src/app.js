@@ -1,14 +1,16 @@
 import express from 'express';
 import __dirname from './utils.js';
 import { fork } from 'child_process';
+import os from 'os';
+import cluster from 'cluster';
 
 const app = express();
 
-const server = app.listen(8080, () => console.log('Listening on port 8080'))
+const CPUs = os.cpus().length;
 
-app.get('/', (req, res) => {
-    res.send('Ok!')
-})
+const PORT = process.env.PORT || 8080;
+
+const server = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 app.get('/api/randoms', (req, res) => {
     let quantity;

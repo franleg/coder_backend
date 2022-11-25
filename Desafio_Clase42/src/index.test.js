@@ -60,11 +60,11 @@ describe('Products testing', () => {
         it('Debería poder crearse un nuevo producto', async () => {
             const response = await requester.post('/api/products')
                                             .set('Content-Type', 'application/x-www-form-urlencoded')
-                                            .field('title', 'Pioneer djm-850')
-                                            .field('price', 450000)
-                                            .field('description', 'mixer')
+                                            .field('title', 'KRK G3')
+                                            .field('price', 120000)
+                                            .field('description', 'monitores')
                                             .field('stock', 10)
-                                            .attach('thumbnail', __dirname + '/public/img/1669217513217-compacteras.700.jpg')
+                                            .attach('thumbnail', __dirname + '/public/img/1667942272383-monitores.krk.jpg')
             const { _body } = response;
             console.log(_body);
             expect(_body.payload).to.be.an('object').and.to.include.keys('title', 'price', 'description', 'stock', 'thumbnail')
@@ -73,14 +73,14 @@ describe('Products testing', () => {
 
     describe('PUT', () => {
         it('Debería poder actualizarse un producto', async () => {
-            const id = '637e3ce9e553a3eb80c7ec0f'
+            const id = '6380c66b4a4a0d54cd685225'
             const response = await requester.put(`/api/products/${id}`)
                                             .set('Content-Type', 'application/x-www-form-urlencoded')
-                                            .field('title', 'Pioneer xdj-700')
+                                            .field('title', 'Sennheiser HD-25')
                                             .field('price', 280000)
-                                            .field('description', 'Reproductor Dj')
+                                            .field('description', 'Auriculares')
                                             .field('stock', 10)
-                                            .attach('thumbnail', __dirname + '/public/img/1669217513217-compacteras.700.jpg')
+                                            .attach('thumbnail', __dirname + '/public/img/1668612689300-auris.sennheiser.jpg')
             const { _body } = response;
             console.log(_body);
             expect(_body.payload).to.be.an('array');
@@ -89,7 +89,7 @@ describe('Products testing', () => {
 
     describe('DELETE', () => {
         it('Debería poder eliminarse un producto por su id', async () => {
-            const id = '63750251a7fdd7231f1a2a9e'
+            const id = '6380c84b4a4a0d54cd68522f'
             const response = await requester.delete(`/api/products/${id}`)
             expect(response.status).to.be.equal(200);
         })
