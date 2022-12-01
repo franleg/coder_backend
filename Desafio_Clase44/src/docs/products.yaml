@@ -1,0 +1,182 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: 'Id autogenerado de mongo'
+        title:
+          type: string
+          description: 'Nombre del producto'
+        price:
+          type: number
+          description: 'Precio del producto'
+        description:
+          type: string
+          description: 'Descripción del producto'
+        stock: 
+          type: Number
+          description: 'Cantidad en stock del producto'
+        thumbnail:
+          type: string
+          description: 'Imágen del producto'
+        timestamp:
+          type: string
+          description: 'Fecha de creación del producto'
+        code: 
+          type: string
+          description: 'Código autogenerado del producto'
+      example:
+        _id: '636ach884ed97519g60ne78h'
+        tittle: 'Pioneer xdj-1000'
+        price: 450000
+        description: 'Reproductor Dj'
+        stock: 10
+        thumbnail: '1667942352323-compacteras.1000.jpg'
+        timestamp: '29/11/2022 10:24:30'
+        code: '61prjy9su'
+
+  requestBodies:
+    newProduct:
+      type: object
+      required:
+        - title
+        - price
+        - description
+        - stock
+        - thumbnail
+      properties:
+        title:
+          type: string
+          description: 'Nombre del producto'
+        price:
+          type: number
+          description: 'Precio del producto'
+        description:
+          type: string
+          description: 'Descripción del producto'
+        stock:
+          type: number
+          description: 'Cantidad en stock del producto'
+        thumbnail:
+          type: string
+          format: binary
+          description: 'Imágen del producto'
+      example:
+        title: 'Sennheiser HD-25'
+        price: 90000
+        description: Auriculares
+        stock: 10
+        thumbnail: '1668612689300-auris.sennheiser.jpg'
+
+paths:
+  /api/products:
+    post:
+      summary: 'Crea un nuevo usuario'
+      tags: 
+        - Products
+      requestBody:
+        content: 
+          multipart/form-data:
+            schema:
+              $ref: '#/components/requestBodies/newProduct'
+      responses:
+        '200':
+          description: 'El producto se creó correctamente'
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: 'El producto ya existía en la base de datos o se enviaron datos incompletos'
+        '500':
+          description: 'Error interno de inserción en la base de datos'
+
+    get:
+      summary: 'Obtiene todos los productos de la base de datos'
+      tags: 
+        - Products
+      responses:
+        '200': 
+          description: 'Los productos se obtuvieron correctamente'
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '404':
+          description: 'No se han encontrado productos disponibles'
+
+  /api/products/{idProduct}:
+    get:
+      summary: 'Obtiene un producto en la base de datos por su id'
+      tags: 
+        - Products
+      parameters:
+      - name: idProduct
+        in: path
+        required: true
+        description: 'Define el id del producto guardado en mongodb'
+        schema:
+          type: string
+      responses:
+        '200': 
+          description: 'El producto se obtuvo correctamente'
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Product'
+        '400': 
+          description: 'Formato de id incorrecto'                
+        '404': 
+          description: 'No se pudo encontrar el producto'
+
+    put:
+      summary: 'Actualiza un producto en la base de datos por su id'
+      tags: 
+        - Products
+      parameters:
+      - name: idProduct
+        in: path
+        required: true
+        description: 'Define el id del producto guardado en mongodb'
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content: 
+          multipart/form-data:
+            schema:
+              $ref: '#/components/requestBodies/newProduct'
+      responses:
+        '200': 
+          description: 'El producto se actualizó correctamente'
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Product'
+        '400': 
+          description: 'Formato de id incorrecto'
+        '404': 
+          description: 'No se pudo encontrar el producto' 
+
+    delete:
+      summary: 'Elimina un producto en la base de datos por su id'
+      tags: 
+        - Products
+      parameters:
+      - name: idProduct
+        in: path
+        required: true
+        description: 'Define el id del producto guardado en mongodb'
+        schema:
+          type: string 
+      responses:
+        '200': 
+          description: 'El producto se eliminó correctamente'
+        '400': 
+          description: 'Formato de id incorrecto'
+        '404': 
+          description: 'No se pudo encontrar el producto'

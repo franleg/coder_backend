@@ -1,0 +1,158 @@
+components:
+  schemas:
+    User: 
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: 'Id autogenerado de mongo'
+        first_name:
+          type: string
+          description: 'Nombre del usuario'
+        last_name:
+          type: string
+          description: 'Apellido del usuario'
+        age:
+          type: number
+          description: 'Edad del usuario'
+        adress:
+          type: string
+          description: 'Dirección del usuario'
+        phone:
+          type: number
+          description: 'Número telefónico del usuario'
+        email:
+          type: string
+          description: 'Correo del usuario, este campo es único'
+        password:
+          type: string
+          description: 'Contraseña hasheada del usuario'
+        avatar:
+          type: string
+          description: 'Imágen del usuario'
+        cart:
+          type: ObjectId
+          description: 'Id del carrito del usuario'
+        role:
+          type: string
+          description: 'Rol del usuario'
+      example: 
+        _id: '636ac9584ed96002f80ne50b'
+        first_name: 'Ramiro'
+        last_name: 'Gonzalez'
+        age: 24
+        adress: 'Buenos Aires'
+        phone: 1132819671
+        email: 'ramiro@correo.com'
+        password: '$2b$10$caQsja1TNtZyckkMdPUDdeTQY2g5gpENd3GnvH0pi5PSdlxjo6A92'
+        avatar: '1667951864788-piano-g8b182ef92_1920.jpg'
+        cart: '636a5cf85h5e2d13b59ea18a'
+        role: 'user'
+
+  requestBodies:
+    newUser:
+      type: object
+      required:
+        - first_name
+        - last_name 
+        - age
+        - adress
+        - phone
+        - email
+        - password
+        - avatar
+      properties:
+        first_name:
+          type: string
+          description: 'Nombre del usuario'
+        last_name:
+          type: string
+          description: 'Apellido del usuario'
+        age:
+          type: number
+          description: 'Edad del usuario'
+        adress:
+          type: string
+          description: 'Dirección del usuario'
+        phone:
+          type: number
+          description: 'Número telefónico del usuario'
+        email:
+          type: string
+          description: 'Correo único del usuario'
+        password:
+          type: string
+          description: 'Contraseña del usuario sin hashear'
+        avatar:
+          type: string
+          format: binary
+          description: 'Imágen del usuario'
+      example:
+        first_name: 'Marcelo'
+        last_name: 'Segovia'
+        age: 24
+        adress: 'Buenos Aires'
+        phone: 1145811904
+        email: 'marcelo@correo.com'
+        password: '123'   
+
+paths:
+  /api/sessions/register:
+    post:
+      summary: 'Crea un nuevo usuario'
+      tags: 
+        - Users
+      requestBody:
+        content: 
+          multipart/form-data:
+            schema:
+              $ref: '#/components/requestBodies/newUser'
+      responses:
+        '200':
+          description: 'El usuario se insertó correctamente'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 'El usuario ya existía en la base de datos o se enviaron datos incompletos'
+        '500':
+          description: 'Error interno de inserción en la base de datos'
+  /api/users:
+    get:
+      summary: 'Obtiene todos los usuarios de la base de datos'
+      tags: 
+        - Users
+      responses:
+        '200': 
+          description: 'Los usuarios se obtuvieron correctamente'
+          content: 
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /api/users/{idUser}:
+    get:
+      summary: 'Obtiene un usuario en la base de datos por su id'
+      tags: 
+        - Users
+      parameters:
+      - name: idUser
+        in: path
+        required: true
+        description: 'Define el id del usuario guardado en mongodb'
+        schema:
+          type: string
+      responses:
+        '200': 
+          description: 'El usuario se obtuvo correctamente'
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+        '400': 
+          description: 'Formato de id incorrecto'                
+        '404': 
+          description: 'No se pudo encontrar el usuario'        

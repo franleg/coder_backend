@@ -1,0 +1,36 @@
+{{> header}}
+
+{{!-- HOME --}}
+<div class="products-container">
+    <h2>Lista de Productos</h2>
+    <hr>
+        {{#if hasProducts}}
+            <div class="cards-container" id="cards-container">
+                {{#each products}}
+                    <div class="card">
+                        <img src="../img/{{this.thumbnail}}" class="card-img-top img-cards img-fluid">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">{{this.title}}</h3>
+                            <hr class="card-hr"/>
+                            <div>
+                                <span>${{this.price}}</span>
+                            </div>
+                            <h5 class="counter-title">Cantidad</h5>
+                            <div class="quantity-container">
+                                <div class="substract-icon quantity-icon" id="substract-icon">-</div>
+                                <div class="quantity" id="quantity">1</div>
+                                <div class="add-icon quantity-icon" id="add-icon">+</div>
+                            </div>
+                            <i id="{{this.id}}" class="fas fa-cart-plus add_cart"></i>
+                        </div>
+                    </div>  
+                {{/each}}              
+            </div>
+        {{else}}
+            <p>No hay productos disponibles</p>
+        {{/if}}
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="js/home.js"></script
